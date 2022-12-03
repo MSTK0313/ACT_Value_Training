@@ -9,13 +9,15 @@ import Foundation
 import RealmSwift
 
 protocol Factory {
-    func handleTheRequest(request: String, task: Task, updateTask: Task) -> Any
+    func handleTheRequest(request: String) -> Any
 }
 
 class CRUDFactory: Factory {
+    var userId: Int
     var value: ACTValue
     
-    init (value: ACTValue) {
+    init (userId: Int, value: ACTValue) {
+        self.userId = userId
         self.value = value
     }
     

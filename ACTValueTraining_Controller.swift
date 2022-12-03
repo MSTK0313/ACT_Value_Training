@@ -32,7 +32,7 @@ class ACTValueTrainingController: ACTValueTrainingRequestControlled {
     }
     
     func controllARequest() -> String {
-        let resultOfRequest = CRUDFactory(userId: userId, value: value, target: Target()).handleTheRequest(request: request.request)
+        let resultOfRequest = CRUDFactory(userId: userId, value: value).handleTheRequest(request: request.request)
         return resultOfRequest as! String
     }
     

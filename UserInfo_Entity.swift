@@ -26,7 +26,6 @@ class UserInfo: Object {
     @Persisted var userName: String
     
     @Persisted var values: List<ACTValue>
-    @Persisted var tasks: List<Task>
 }
 
 //extension UserInfo {

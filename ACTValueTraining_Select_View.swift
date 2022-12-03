@@ -86,9 +86,9 @@ struct ACTValueTrainingSelect_View: View {
                     ).opacity(0)
 
                     Button(action : {
-                        if(CrickResistantButton().crickResistantButton(dataSet: flagCheck(flags: selectionValue)) == "SUCCESS") {
-                            communication = true
-                        }
+//                        if(CrickResistantButton().crickResistantButton(dataSet: flagCheck(flags: selectionValue)) == "SUCCESS") {
+//                            communication = true
+//                        }
                     }) {
                         Text("OK")
                         .font(.title3)
@@ -101,130 +101,129 @@ struct ACTValueTrainingSelect_View: View {
         .navigationViewStyle(StackNavigationViewStyle())
     }
     
-    func flagCheck(flags: Set<String>) -> [ACTValueTrainingSelectModel] {
-        var dataSet = [ACTValueTrainingSelectModel(request: ACTValueTrainingRequest(request: ""), user: UserInfo(), value: ACTValue())]
-        for flag in flags {
-            let request = ACTValueTrainingRequest(request: "")
-            let uer = UserInfo()
-            let value = ACTValue()
-            let target = Target()
-            switch flag {
-            case "家族":
-                target.target = family
-                target.achivementLevel = achivementLevel_family
-                target.idealLevel = idealLevel_family
-                target.selectedTargetFlag = true
-                
-                value.category = flag
-//                value.target = target
-                
-                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
-                
-            case "恋人":
-                target.target = love
-                target.achivementLevel = achivementLevel_love
-                target.idealLevel = idealLevel_love
-                target.selectedTargetFlag = true
-                
-                value.category = flag
-//                value.target = target
-                
-                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
-                
-            case "養育":
-                target.target = nurture
-                target.achivementLevel = achivementLevel_nurture
-                target.idealLevel = idealLevel_nurture
-                target.selectedTargetFlag = true
-                
-                value.category = flag
-//                value.target = target
-                
-                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
-                
-            case "友人":
-                target.target = friend
-                target.achivementLevel = achivementLevel_friend
-                target.idealLevel = idealLevel_friend
-                target.selectedTargetFlag = true
-                
-                value.category = flag
-//                value.target = target
-                
-                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
-
-            case "仕事":
-                target.target = work
-                target.achivementLevel = achivementLevel_work
-                target.idealLevel = idealLevel_work
-                target.selectedTargetFlag = true
-                
-                value.category = flag
-//                value.target = target
-                
-                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
-
-            case "成長":
-                target.target = grows
-                target.achivementLevel = achivementLevel_grows
-                target.idealLevel = idealLevel_grows
-                target.selectedTargetFlag = true
-                
-                value.category = flag
-//                value.target = target
-                
-                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
-
-            case "余暇":
-                target.target = hoby
-                target.achivementLevel = achivementLevel_hoby
-                target.idealLevel = idealLevel_hoby
-                target.selectedTargetFlag = true
-                
-                value.category = flag
-//                value.target = target
-                
-                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
-                
-            case "メンタリティ":
-                target.target = mental
-                target.achivementLevel = achivementLevel_mental
-                target.idealLevel = idealLevel_mental
-                target.selectedTargetFlag = true
-                
-                value.category = flag
-//                value.target = target
-                
-                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
-
-            case "コミュニティ":
-                target.target = community
-                target.achivementLevel = achivementLevel_community
-                target.idealLevel = idealLevel_community
-                target.selectedTargetFlag = true
-                
-                value.category = flag
-//                value.target = target
-                
-                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
-
-            case "健康":
-                target.target = health
-                target.achivementLevel = achivementLevel_health
-                target.idealLevel = idealLevel_health
-                target.selectedTargetFlag = true
-                
-                value.category = flag
-//                value.target = target
-                
-                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
-
-            default:
-                print("")
-            }
-        }
-        return dataSet
-    }
+//    func flagCheck(flags: Set<String>) -> [ACTValueTrainingSelectModel] {
+//        var dataSet = [ACTValueTrainingSelectModel(request: ACTValueTrainingRequest(request: ""), user: UserInfo(), value: ACTValue())]
+//        for flag in flags {
+//            let request = ACTValueTrainingRequest(request: "")
+//            let uer = UserInfo()
+//            let value = ACTValue()
+//            switch flag {
+//            case "家族":
+//                target.target = family
+//                target.achivementLevel = achivementLevel_family
+//                target.idealLevel = idealLevel_family
+//                target.selectedTargetFlag = true
+//
+//                value.category = flag
+////                value.target = target
+//
+//                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
+//
+//            case "恋人":
+//                target.target = love
+//                target.achivementLevel = achivementLevel_love
+//                target.idealLevel = idealLevel_love
+//                target.selectedTargetFlag = true
+//
+//                value.category = flag
+////                value.target = target
+//
+//                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
+//
+//            case "養育":
+//                target.target = nurture
+//                target.achivementLevel = achivementLevel_nurture
+//                target.idealLevel = idealLevel_nurture
+//                target.selectedTargetFlag = true
+//
+//                value.category = flag
+////                value.target = target
+//
+//                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
+//
+//            case "友人":
+//                target.target = friend
+//                target.achivementLevel = achivementLevel_friend
+//                target.idealLevel = idealLevel_friend
+//                target.selectedTargetFlag = true
+//
+//                value.category = flag
+////                value.target = target
+//
+//                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
+//
+//            case "仕事":
+//                target.target = work
+//                target.achivementLevel = achivementLevel_work
+//                target.idealLevel = idealLevel_work
+//                target.selectedTargetFlag = true
+//
+//                value.category = flag
+////                value.target = target
+//
+//                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
+//
+//            case "成長":
+//                target.target = grows
+//                target.achivementLevel = achivementLevel_grows
+//                target.idealLevel = idealLevel_grows
+//                target.selectedTargetFlag = true
+//
+//                value.category = flag
+////                value.target = target
+//
+//                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
+//
+//            case "余暇":
+//                target.target = hoby
+//                target.achivementLevel = achivementLevel_hoby
+//                target.idealLevel = idealLevel_hoby
+//                target.selectedTargetFlag = true
+//
+//                value.category = flag
+////                value.target = target
+//
+//                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
+//
+//            case "メンタリティ":
+//                target.target = mental
+//                target.achivementLevel = achivementLevel_mental
+//                target.idealLevel = idealLevel_mental
+//                target.selectedTargetFlag = true
+//
+//                value.category = flag
+////                value.target = target
+//
+//                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
+//
+//            case "コミュニティ":
+//                target.target = community
+//                target.achivementLevel = achivementLevel_community
+//                target.idealLevel = idealLevel_community
+//                target.selectedTargetFlag = true
+//
+//                value.category = flag
+////                value.target = target
+//
+//                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
+//
+//            case "健康":
+//                target.target = health
+//                target.achivementLevel = achivementLevel_health
+//                target.idealLevel = idealLevel_health
+//                target.selectedTargetFlag = true
+//
+//                value.category = flag
+////                value.target = target
+//
+//                dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value))
+//
+//            default:
+//                print("")
+//            }
+//        }
+//        return dataSet
+//    }
 }
 
 struct ACTValueTrainingSelect_View_Previews: PreviewProvider {

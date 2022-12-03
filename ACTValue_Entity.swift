@@ -1,6 +1,6 @@
 //
 //  ACTValueTraining_Entity.swift
-//  JACK4
+//  JACK
 //
 //  Created by Sato Masataka on 2022/11/17.
 //
