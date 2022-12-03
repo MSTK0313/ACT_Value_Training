@@ -13,17 +13,13 @@ protocol Factory {
 }
 
 class CRUDFactory: Factory {
-    var userId: Int
     var value: ACTValue
-    var target: Target
     
-    init (userId: Int, value: ACTValue, target: Target) {
-        self.userId = userId
+    init (value: ACTValue) {
         self.value = value
-        self.target = target
     }
     
-    func handleTheRequest(request: String, task: Task = Task(), updateTask: Task = Task()) -> Any {
+    func handleTheRequest(request: String) -> Any {
         switch request {
         case "CREATE_ACTVALUETRAINING_DATA":
             let returnRequest = ACTValueTrainingRequest(request: request)
@@ -56,64 +52,6 @@ class CRUDFactory: Factory {
         case "MOCKDELETE_ACTVALUETRAINING_DATA":
             let returnRequest = ACTValueTrainingRequest(request: request)
             return ACTValueTrainingController(request: returnRequest, userId: userId, value: value).mockDeleteValueData()
-        
-            
-        case "CREATE_REWARDSENSEPLANNING_DATA":
-            let returnRequest = RewardSensePlanningRequest(request: request)
-            return RewardSensePlanningController(request: returnRequest, userId: userId, value: value, target: target).createARewardSensePlanningData()
-            
-        case "MOCKCREATE_REWARDSENSEPLANNING_DATA":
-            let returnRequest = RewardSensePlanningRequest(request: request)
-            return RewardSensePlanningController(request: returnRequest, userId: userId, value: value, target: target).mockCreateARewardSensePlanningData()
-        
-        case "READ_REWARDSENSEPLANNING_DATA":
-            let returnRequest = RewardSensePlanningRequest(request: request)
-            return RewardSensePlanningController(request: returnRequest, userId: userId, value: value, target: target).readARewardSensePlanningData()
-            
-        case "MOCKREAD_REWARDSENSEPLANNING_DATA":
-            let returnRequest = RewardSensePlanningRequest(request: request)
-            return RewardSensePlanningController(request: returnRequest, userId: userId, value: value, target: target).mockReadARewardSensePlanningData()
-            
-        case "UPDATE_REWARDSENSEPLANNING_DATA":
-            let returnRequest = RewardSensePlanningRequest(request: request)
-            return RewardSensePlanningController(request: returnRequest, userId: userId, value: value, target: target).updateARewardSensePlanningData()
-            
-        case "MOCKUPDATE_REWARDSENSEPLANNING_DATA":
-            let returnRequest = RewardSensePlanningRequest(request: request)
-            return RewardSensePlanningController(request: returnRequest, userId: userId, value: value, target: target).mockUpdateARewardSensePlanningData()
-            
-        case "DELETE_REWARDSENSEPLANNING_DATA":
-            let returnRequest = RewardSensePlanningRequest(request: request)
-            return RewardSensePlanningController(request: returnRequest, userId: userId, value: value, target: target).deleteARewardSensePlanningData()
-            
-        case "MOCKDELETE_REWARDSENSEPLANNING_DATA":
-            let returnRequest = RewardSensePlanningRequest(request: request)
-            return RewardSensePlanningController(request: returnRequest, userId: userId, value: value, target: target).mockDeleteARewardSensePlanningData()
-        
-            
-        case "READ_TASKMANAGEMENT_DATA":
-            let returnRequest = TaskManagementRequest(request: request)
-            return TaskManagementController(request: returnRequest, userId: userId, value: value, target: target, task: task).readInitData()
-            
-        case "MOCKREAD_TASKMANAGEMENT_DATA":
-            let returnRequest = TaskManagementRequest(request: request)
-            return TaskManagementController(request: returnRequest, userId: userId, value: value, target: target, task: task).mockReadInitData()
-            
-        case "UPDATE_TASKMANAGEMENT_DATA":
-            let returnRequest = TaskManagementRequest(request: request)
-            return TaskManagementController(request: returnRequest, userId: userId, value: value, target: target, task: task).updateInstantTaskData(update:)
-            
-        case "MOCKUPDATE_TASKMANAGEMENT_DATA":
-            let returnRequest = TaskManagementRequest(request: request)
-            return TaskManagementController(request: returnRequest, userId: userId, value: value, target: target, task: task).mockUpdateInstantTaskData(update: updateTask)
-            
-        case "DELETE_TASKMANAGEMENT_DATA":
-            let returnRequest = TaskManagementRequest(request: request)
-            return TaskManagementController(request: returnRequest, userId: userId, value: value, target: target, task: task).deleteInstantTaskData()
-            
-        case "MOCKDELETE_TASKMANAGEMENT_DATA":
-            let returnRequest = TaskManagementRequest(request: request)
-            return TaskManagementController(request: returnRequest, userId: userId, value: value, target: target, task: task).mockDeleteInstantTaskData()
             
         default:
             return "NO REQUEST"
