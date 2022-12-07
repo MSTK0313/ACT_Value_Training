@@ -20,7 +20,7 @@ class ACTValueTrainingSelectPresenter: ACTValueTrainingPresenter {
         var result = ""
         for data in dataSet {
             result = ACTValueTrainingController(request: data.request, userId: data.user.userId, value: data.value).controllARequest()
-
+            print(result)
         }
         return result
     }

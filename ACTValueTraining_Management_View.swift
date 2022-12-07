@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct ACTValueTrainingManagement_View: View {
+    @State var show: Bool = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+        Button(action: { self.show.toggle() }) {
+           Text("Add")
+        }
+        .buttonStyle(OK_ButtonStyle())
+        .fullScreenCover(isPresented: self.$show) {
+           ACTValueTrainingInput_View()
+        }
+   }
 }
 
 struct ACTValueTrainingManagement_View_Previews: PreviewProvider {
