@@ -13,6 +13,8 @@ protocol ACTValueTrainingRequester {
     var value: ACTValue { get }
     func createValue() -> ACTValueTrainingResponse
     func mockCreateValue() -> ACTValueTrainingResponse
+    func readInitValues() -> [ACTValue]
+    func mockReadInitValues() -> [ACTValue]
     func readValue() -> ACTValue
     func mockReadValue() -> ACTValue
     func updateValue() -> ACTValueTrainingResponse
@@ -55,6 +57,25 @@ class ACTValueTraining: ACTValueTrainingRequester {
     func mockReadValue() -> ACTValue {
         let result = ACTValue()
         
+        return result
+    }
+    
+    
+    func readInitValues() -> [ACTValue] {
+        var result = [ACTValue()]
+        
+        result = ACTValueTrainingDataMapper(realm: RealmBorderline().toSetDefault(), userId: userId, value: value).readInitValues()
+        return result
+    }
+    
+    func mockReadInitValues() -> [ACTValue] {
+        var result = [ACTValue()]
+        let test = ACTValue(value: ["category": "Family", "idealAction": "I want to pass the test", "idealLevel": 1, "achivementLevel": 2])
+        let test2 = ACTValue(value: ["category": "Grows", "idealAction": "How much can this section explore words?", "idealLevel": 10, "achivementLevel": 5])
+        result.removeFirst()
+        result.append(test)
+        result.append(test2)
+//        result = ACTValueTrainingDataMapper(realm: RealmBorderline().toSetDefault(), userId: userId, value: value).readInitValues()
         return result
     }
     
@@ -112,6 +133,7 @@ protocol ACTValueTrainingGateway {
     var value: ACTValue { get }
     func createValue() -> ACTValueTrainingResponse
     func readValue() -> ACTValue
+    func readInitValues() -> [ACTValue]
     func updateValue() -> ACTValueTrainingResponse
     func deleteValue() -> ACTValueTrainingResponse
     func commitOrRollbackAndReturnResult() -> ACTValueTrainingResponse

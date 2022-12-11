@@ -9,11 +9,13 @@ import Foundation
 import RealmSwift
 
 protocol ACTValueTrainingRequestControlled {
-    func controllARequest() -> String
+    func controllARequest() -> Any
     func createValueData() -> String
     func mockCreateValueData() -> String
     func readValueData() -> ACTValue
     func mockReadValueData() -> ACTValue
+    func readInitValueData() -> [ACTValue]
+    func mockReadInitValueData() -> [ACTValue]
     func updateValueData() -> ACTValueTrainingResponse
     func mockUpdateValueData() -> ACTValueTrainingResponse
     func deleteValueData() -> String
@@ -31,9 +33,9 @@ class ACTValueTrainingController: ACTValueTrainingRequestControlled {
         self.value = value
     }
     
-    func controllARequest() -> String {
+    func controllARequest() -> Any {
         let resultOfRequest = CRUDFactory(userId: userId, value: value).handleTheRequest(request: request.request)
-        return resultOfRequest as! String
+        return resultOfRequest
     }
     
     
@@ -55,6 +57,17 @@ class ACTValueTrainingController: ACTValueTrainingRequestControlled {
     }
     func mockReadValueData() -> ACTValue {
         let result = ACTValueTraining(userId: userId, value: value).mockReadValue()
+        return result
+    }
+    
+    
+    func readInitValueData() -> [ACTValue] {
+        let result = ACTValueTraining(userId: userId, value: value).readInitValues()
+        return result
+    }
+    
+    func mockReadInitValueData() -> [ACTValue] {
+        let result = ACTValueTraining(userId: userId, value: value).mockReadInitValues()
         return result
     }
     

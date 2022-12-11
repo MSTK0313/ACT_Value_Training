@@ -39,6 +39,14 @@ class CRUDFactory: Factory {
             let returnRequest = ACTValueTrainingRequest(request: request)
             return ACTValueTrainingController(request: returnRequest, userId: userId, value: value).mockReadValueData()
             
+        case "READ_INIT_ACTVALUETRAINING_DATA":
+            let returnRequest = ACTValueTrainingRequest(request: request)
+            return ACTValueTrainingController(request: returnRequest, userId: userId, value: value).readInitValueData()
+            
+        case "MOCKREAD_INIT_ACTVALUETRAINING_DATA":
+            let returnRequest = ACTValueTrainingRequest(request: request)
+            return ACTValueTrainingController(request: returnRequest, userId: userId, value: value).mockReadInitValueData()
+            
         case "UPDATE_ACTVALUETRAINING_DATA":
             let returnRequest = ACTValueTrainingRequest(request: request)
             return ACTValueTrainingController(request: returnRequest, userId: userId, value: value).updateValueData()

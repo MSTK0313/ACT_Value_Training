@@ -7,7 +7,6 @@
 
 import Foundation
 import RealmSwift
-
 //class UserInfo: Object {
 //    @Persisted (primaryKey: true) var userId: Int
 //    @Persisted var userPass: String

@@ -27,12 +27,21 @@ class ACTValueTrainingManagementPresenter: ACTValueTrainingPresenter {
     
 }
 
-struct ACTValueTrainingManagementModel {
-    var target              : String
-    var value               : String
-    var achivementLevel     : Int
-    var idealLevel          : Int
-    var selectedTargetFlag  : Bool
-    var request             : String
-}
+//struct ACTValueTrainingManagementModel {
+//    var value               : String
+//    var achivementLevel     : Int
+//    var idealLevel          : Int
+//    var selectedTargetFlag  : Bool
+//    var request             : String
+//}
 
+class ACTValueTrainingManagementModel: ObservableObject {
+    @Published var values = [ACTValue()]
+    init() {
+        let request = ACTValueTrainingRequest(request: "MOCKREAD_INIT_ACTVALUETRAINING_DATA")
+        let uer = UserInfo()
+        uer.userId = 1
+        let value = ACTValue()
+        values = ACTValueTrainingController(request: request, userId: uer.userId, value: value).controllARequest() as! [ACTValue]
+    }
+}

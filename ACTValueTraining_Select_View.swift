@@ -83,7 +83,7 @@ struct ACTValueTrainingSelect_View: View {
     func flagCheck(flags: Set<String>) -> [ACTValueTrainingSelectModel] {
         var dataSet = [ACTValueTrainingSelectModel(request: ACTValueTrainingRequest(request: ""), user: UserInfo(), value: ACTValue())]
         for flag in flags {
-            let request = ACTValueTrainingRequest(request: "CREATE_ACTVALUETRAINING_DATA")
+            let request = ACTValueTrainingRequest(request: "MOCKCREATE_ACTVALUETRAINING_DATA")
             let uer = UserInfo()
             let value = ACTValue()
             switch flag {

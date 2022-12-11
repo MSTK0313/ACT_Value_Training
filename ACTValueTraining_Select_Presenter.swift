@@ -19,7 +19,7 @@ class ACTValueTrainingSelectPresenter: ACTValueTrainingPresenter {
     func connectViewDataToController(dataSet: [ACTValueTrainingSelectModel]) -> String {
         var result = ""
         for data in dataSet {
-            result = ACTValueTrainingController(request: data.request, userId: data.user.userId, value: data.value).controllARequest()
+            result = ACTValueTrainingController(request: data.request, userId: 1, value: data.value).controllARequest() as! String
             print(result)
         }
         return result

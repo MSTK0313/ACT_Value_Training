@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct Login_View: View {
+    @State var show = false
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action : { self.show.toggle() }) {
+           Text("Sign in with Apple")
+        }
+       .buttonStyle(OK_ButtonStyle())
     }
 }
 

@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct ACTValueTrainingInput_View: View {   
+struct ACTValueTrainingInput_View: View {
+    @EnvironmentObject var model: ACTValueTrainingManagementModel
     @State var idealAction_family = ""
     @State var idealLevel_family = 1
     @State var achivementLevel_family = 1
@@ -39,38 +40,31 @@ struct ACTValueTrainingInput_View: View {
     @State var idealLevel_health = 1
     @State var achivementLevel_health = 1
     
-    
     @State var show: Bool = false
        
+    //TODO: データがあれば表示したい、なければ初期表示のまま
     var body: some View {
-        List {
-            Section {
-                template(category: "Family", idealAction: $idealAction_family, idealLevel: $idealLevel_family, achivementLevel: $achivementLevel_family)
-                
-                template(category: "Lover", idealAction: $idealAction_lover, idealLevel: $idealLevel_lover, achivementLevel: $achivementLevel_lover)
-                
-                template(category: "Nuture", idealAction: $idealAction_nurture, idealLevel: $idealLevel_nurture, achivementLevel: $achivementLevel_nurture)
-                
-                template(category: "Friends", idealAction: $idealAction_friend, idealLevel: $idealLevel_friend, achivementLevel: $achivementLevel_friend)
-                
-                template(category: "Work", idealAction: $idealAction_work, idealLevel: $idealLevel_work, achivementLevel: $achivementLevel_work)
-                
-                template(category: "Grows", idealAction: $idealAction_grows, idealLevel: $idealLevel_grows, achivementLevel: $achivementLevel_grows)
-                
-                template(category: "Hobby", idealAction: $idealAction_hobby, idealLevel: $idealLevel_hobby, achivementLevel: $achivementLevel_hobby)
-                
-                template(category: "Mentality", idealAction: $idealAction_mental, idealLevel: $idealLevel_mental, achivementLevel: $achivementLevel_mental)
-                
-                template(category: "Community", idealAction: $idealAction_community, idealLevel: $idealLevel_community, achivementLevel: $achivementLevel_community)
-                
-                template(category: "Health", idealAction: $idealAction_health, idealLevel: $idealLevel_health, achivementLevel: $achivementLevel_health)
+        VStack {
+            List {
+                Section {
+                    template(category: "Family", idealAction: $idealAction_family, idealLevel: $idealLevel_family, achivementLevel: $achivementLevel_family)
+                    template(category: "Lover", idealAction: $idealAction_lover, idealLevel: $idealLevel_lover, achivementLevel: $achivementLevel_lover)
+                    template(category: "Nuture", idealAction: $idealAction_nurture, idealLevel: $idealLevel_nurture, achivementLevel: $achivementLevel_nurture)
+                    template(category: "Friends", idealAction: $idealAction_friend, idealLevel: $idealLevel_friend, achivementLevel: $achivementLevel_friend)
+                    template(category: "Work", idealAction: $idealAction_work, idealLevel: $idealLevel_work, achivementLevel: $achivementLevel_work)
+                    template(category: "Grows", idealAction: $idealAction_grows, idealLevel: $idealLevel_grows, achivementLevel: $achivementLevel_grows)
+                    template(category: "Hobby", idealAction: $idealAction_hobby, idealLevel: $idealLevel_hobby, achivementLevel: $achivementLevel_hobby)
+                    template(category: "Mentality", idealAction: $idealAction_mental, idealLevel: $idealLevel_mental, achivementLevel: $achivementLevel_mental)
+                    template(category: "Community", idealAction: $idealAction_community, idealLevel: $idealLevel_community, achivementLevel: $achivementLevel_community)
+                    template(category: "Health", idealAction: $idealAction_health, idealLevel: $idealLevel_health, achivementLevel: $achivementLevel_health)
+                }
             }
             Button(action : { self.show.toggle() }) {
                Text("OK")
             }
            .buttonStyle(OK_ButtonStyle())
            .fullScreenCover(isPresented: self.$show) {
-               ACTValueTrainingSelect_View(idealAction_family: self.$idealAction_family, idealLevel_family: self.$idealLevel_family, achivementLevel_family: self.$achivementLevel_family,idealAction_lover: self.$idealAction_lover,idealLevel_lover: self.$idealLevel_lover,achivementLevel_lover: self.$achivementLevel_lover,idealAction_nurture: self.$idealAction_nurture,idealLevel_nurture: self.$idealLevel_nurture,achivementLevel_nurture: self.$achivementLevel_nurture,idealAction_friend: self.$idealAction_friend,idealLevel_friend: self.$idealLevel_friend,achivementLevel_friend: self.$achivementLevel_friend,idealAction_work: self.$idealAction_work,idealLevel_work: self.$idealLevel_work,achivementLevel_work: self.$achivementLevel_work,idealAction_grows:self.$idealAction_grows,idealLevel_grows: self.$idealLevel_grows,achivementLevel_grows: self.$achivementLevel_grows,idealAction_hobby:self.$idealAction_hobby,idealLevel_hobby: self.$idealLevel_hobby,achivementLevel_hobby: self.$achivementLevel_hobby,idealAction_mental: self.$idealAction_mental,idealLevel_mental: self.$idealLevel_mental,achivementLevel_mental: self.$achivementLevel_mental,idealAction_community: self.$idealAction_community,idealLevel_community: self.$idealLevel_community,achivementLevel_community: self.$achivementLevel_community,idealAction_health: self.$idealAction_health,idealLevel_health: self.$idealLevel_health,achivementLevel_health: self.$achivementLevel_health)
+               ACTValueTrainingSelect_View(idealAction_family: $idealAction_family, idealLevel_family: $idealLevel_family, achivementLevel_family: $achivementLevel_family,idealAction_lover: $idealAction_lover,idealLevel_lover: $idealLevel_lover,achivementLevel_lover: $achivementLevel_lover,idealAction_nurture: $idealAction_nurture,idealLevel_nurture: $idealLevel_nurture,achivementLevel_nurture: $achivementLevel_nurture,idealAction_friend: $idealAction_friend,idealLevel_friend: $idealLevel_friend,achivementLevel_friend: $achivementLevel_friend,idealAction_work: $idealAction_work,idealLevel_work: $idealLevel_work,achivementLevel_work: $achivementLevel_work,idealAction_grows:$idealAction_grows,idealLevel_grows: $idealLevel_grows,achivementLevel_grows: $achivementLevel_grows,idealAction_hobby:$idealAction_hobby,idealLevel_hobby: $idealLevel_hobby,achivementLevel_hobby: $achivementLevel_hobby,idealAction_mental: $idealAction_mental,idealLevel_mental: $idealLevel_mental,achivementLevel_mental: $achivementLevel_mental,idealAction_community: $idealAction_community,idealLevel_community: $idealLevel_community,achivementLevel_community: $achivementLevel_community,idealAction_health: $idealAction_health,idealLevel_health: $idealLevel_health,achivementLevel_health: $achivementLevel_health)
             }
         }
     }
@@ -113,7 +107,8 @@ struct template: View {
 }
 
 struct ACTValueTrainingInput_View_Previews: PreviewProvider {
+    static var model = ACTValueTrainingManagementModel()
     static var previews: some View {
-        ACTValueTrainingInput_View()
+        ACTValueTrainingInput_View().environmentObject(model)
     }
 }

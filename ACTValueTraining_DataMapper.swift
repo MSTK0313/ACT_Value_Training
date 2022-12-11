@@ -36,9 +36,25 @@ class ACTValueTrainingDataMapper: ACTValueTrainingGateway{
     
     func readValue() -> ACTValue {
         let filterUserInfoByUserId = realm.object(ofType: UserInfo.self, forPrimaryKey: userId)
-        let filterValuesByValue = filterUserInfoByUserId?.values.filter("category = %@", value.category).first
+        var filterValuesByValue = filterUserInfoByUserId?.values.filter("category = %@", value.category).first
+        
+        if(filterValuesByValue == nil) {
+            filterValuesByValue = ACTValue()
+//            print("ERROR: COULD NOT GET DATA")
+        }
         
         return (filterValuesByValue!)
+    }
+    
+    func readInitValues() -> [ACTValue] {
+        var values: [ACTValue] = [ACTValue()]
+        let filterUserInfoByUserId = realm.object(ofType: UserInfo.self, forPrimaryKey: userId)
+        for value in filterUserInfoByUserId!.values {
+            values.append(value)
+        }
+        values.removeFirst()
+        
+        return (values)
     }
 
     func updateValue() -> ACTValueTrainingResponse {
