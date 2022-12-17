@@ -14,10 +14,15 @@ struct ACTValueTrainingManagement_View: View {
     var body: some View {
         VStack {
             List{
-                ForEach(0 ..< model.values.count, id: \.self) { i in
-                    Section(header: Text("\(model.values[i].category)")) {
-                        Text("\(model.values[i].idealAction)")
+                if (model.values.count != 0) {
+                    ForEach(0 ..< model.values.count, id: \.self) { i in
+                        Section(header: Text("\(model.values[i].category)")) {
+                            Text("\(model.values[i].idealAction)")
+                        }
                     }
+                }
+                else {
+                    Text("Please add values")
                 }
             }
             Button(action: { self.show.toggle() }) {

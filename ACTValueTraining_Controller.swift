@@ -12,10 +12,12 @@ protocol ACTValueTrainingRequestControlled {
     func controllARequest() -> Any
     func createValueData() -> String
     func mockCreateValueData() -> String
-    func readValueData() -> ACTValue
-    func mockReadValueData() -> ACTValue
     func readInitValueData() -> [ACTValue]
     func mockReadInitValueData() -> [ACTValue]
+    func readValueData() -> ACTValue
+    func mockReadValueData() -> ACTValue
+    func readValuesData() -> [ACTValue]
+    func mockReadValuesData() -> [ACTValue]
     func updateValueData() -> ACTValueTrainingResponse
     func mockUpdateValueData() -> ACTValueTrainingResponse
     func deleteValueData() -> String
@@ -51,6 +53,17 @@ class ACTValueTrainingController: ACTValueTrainingRequestControlled {
     }
     
     
+    func readInitValueData() -> [ACTValue] {
+        let result = ACTValueTraining(userId: userId, value: value).readInitValues()
+        return result
+    }
+    
+    func mockReadInitValueData() -> [ACTValue] {
+        let result = ACTValueTraining(userId: userId, value: value).mockReadInitValues()
+        return result
+    }
+    
+    
     func readValueData() -> ACTValue {
         let result = ACTValueTraining(userId: userId, value: value).readValue()
         return result
@@ -61,13 +74,13 @@ class ACTValueTrainingController: ACTValueTrainingRequestControlled {
     }
     
     
-    func readInitValueData() -> [ACTValue] {
-        let result = ACTValueTraining(userId: userId, value: value).readInitValues()
+    func readValuesData() -> [ACTValue] {
+        let result = ACTValueTraining(userId: userId, value: value).readValues()
         return result
     }
     
-    func mockReadInitValueData() -> [ACTValue] {
-        let result = ACTValueTraining(userId: userId, value: value).mockReadInitValues()
+    func mockReadValuesData() -> [ACTValue] {
+        let result = ACTValueTraining(userId: userId, value: value).mockReadValues()
         return result
     }
     

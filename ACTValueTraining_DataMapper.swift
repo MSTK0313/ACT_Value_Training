@@ -24,35 +24,26 @@ class ACTValueTrainingDataMapper: ACTValueTrainingGateway{
         let filterUserInfoByUserId = realm.object(ofType: UserInfo.self, forPrimaryKey: userId)
         let filterValuesByValue = filterUserInfoByUserId?.values.filter("category = %@", value.category).first
         
-        if (filterValuesByValue == nil) {
+        if (filterUserInfoByUserId != nil) {
             realm.beginWrite()
             filterUserInfoByUserId?.values.append(value)
-            realm.add(filterUserInfoByUserId!)
+            realm.add(filterUserInfoByUserId!, update: .modified)
             
             result = commitOrRollbackAndReturnResult()
         }
         return result
     }
     
-    func readValue() -> ACTValue {
-        let filterUserInfoByUserId = realm.object(ofType: UserInfo.self, forPrimaryKey: userId)
-        var filterValuesByValue = filterUserInfoByUserId?.values.filter("category = %@", value.category).first
-        
-        if(filterValuesByValue == nil) {
-            filterValuesByValue = ACTValue()
-//            print("ERROR: COULD NOT GET DATA")
-        }
-        
-        return (filterValuesByValue!)
-    }
-    
-    func readInitValues() -> [ACTValue] {
+    func readValues() -> [ACTValue] {
         var values: [ACTValue] = [ACTValue()]
         let filterUserInfoByUserId = realm.object(ofType: UserInfo.self, forPrimaryKey: userId)
-        for value in filterUserInfoByUserId!.values {
-            values.append(value)
+        
+        if (filterUserInfoByUserId != nil) {
+            for value in filterUserInfoByUserId!.values {
+                values.append(value)
+            }
+            values.removeFirst()
         }
-        values.removeFirst()
         
         return (values)
     }
@@ -66,7 +57,7 @@ class ACTValueTrainingDataMapper: ACTValueTrainingGateway{
         filterValuesByValue?.idealLevel = value.idealLevel
         filterValuesByValue?.achivementLevel = value.achivementLevel
         filterValuesByValue?.selectFlag = value.selectFlag
-
+        
         result = commitOrRollbackAndReturnResult()
         
         return result

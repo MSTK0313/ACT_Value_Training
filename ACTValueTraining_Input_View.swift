@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ACTValueTrainingInput_View: View {
-    @EnvironmentObject var model: ACTValueTrainingManagementModel
+//    @EnvironmentObject var model: ACTValueTrainingInputModel
     @State var idealAction_family = ""
     @State var idealLevel_family = 1
     @State var achivementLevel_family = 1
@@ -39,25 +39,22 @@ struct ACTValueTrainingInput_View: View {
     @State var idealAction_health = ""
     @State var idealLevel_health = 1
     @State var achivementLevel_health = 1
-    
+
     @State var show: Bool = false
        
-    //TODO: データがあれば表示したい、なければ初期表示のまま
     var body: some View {
         VStack {
             List {
-                Section {
-                    template(category: "Family", idealAction: $idealAction_family, idealLevel: $idealLevel_family, achivementLevel: $achivementLevel_family)
-                    template(category: "Lover", idealAction: $idealAction_lover, idealLevel: $idealLevel_lover, achivementLevel: $achivementLevel_lover)
-                    template(category: "Nuture", idealAction: $idealAction_nurture, idealLevel: $idealLevel_nurture, achivementLevel: $achivementLevel_nurture)
-                    template(category: "Friends", idealAction: $idealAction_friend, idealLevel: $idealLevel_friend, achivementLevel: $achivementLevel_friend)
-                    template(category: "Work", idealAction: $idealAction_work, idealLevel: $idealLevel_work, achivementLevel: $achivementLevel_work)
-                    template(category: "Grows", idealAction: $idealAction_grows, idealLevel: $idealLevel_grows, achivementLevel: $achivementLevel_grows)
-                    template(category: "Hobby", idealAction: $idealAction_hobby, idealLevel: $idealLevel_hobby, achivementLevel: $achivementLevel_hobby)
-                    template(category: "Mentality", idealAction: $idealAction_mental, idealLevel: $idealLevel_mental, achivementLevel: $achivementLevel_mental)
-                    template(category: "Community", idealAction: $idealAction_community, idealLevel: $idealLevel_community, achivementLevel: $achivementLevel_community)
-                    template(category: "Health", idealAction: $idealAction_health, idealLevel: $idealLevel_health, achivementLevel: $achivementLevel_health)
-                }
+                template(category: "Family", idealAction: $idealAction_family, idealLevel: $idealLevel_family, achivementLevel: $achivementLevel_family).environmentObject(ACTValueTrainingInputModel())
+                template(category: "Lover", idealAction: $idealAction_lover, idealLevel: $idealLevel_lover, achivementLevel: $achivementLevel_lover).environmentObject(ACTValueTrainingInputModel())
+                template(category: "Nuture", idealAction: $idealAction_nurture, idealLevel: $idealLevel_nurture, achivementLevel: $achivementLevel_nurture).environmentObject(ACTValueTrainingInputModel())
+                template(category: "Friends", idealAction: $idealAction_friend, idealLevel: $idealLevel_friend, achivementLevel: $achivementLevel_friend).environmentObject(ACTValueTrainingInputModel())
+                template(category: "Work", idealAction: $idealAction_work, idealLevel: $idealLevel_work, achivementLevel: $achivementLevel_work).environmentObject(ACTValueTrainingInputModel())
+                template(category: "Grows", idealAction: $idealAction_grows, idealLevel: $idealLevel_grows, achivementLevel: $achivementLevel_grows).environmentObject(ACTValueTrainingInputModel())
+                template(category: "Hobby", idealAction: $idealAction_hobby, idealLevel: $idealLevel_hobby, achivementLevel: $achivementLevel_hobby).environmentObject(ACTValueTrainingInputModel())
+                template(category: "Mentality", idealAction: $idealAction_mental, idealLevel: $idealLevel_mental, achivementLevel: $achivementLevel_mental).environmentObject(ACTValueTrainingInputModel())
+                template(category: "Community", idealAction: $idealAction_community, idealLevel: $idealLevel_community, achivementLevel: $achivementLevel_community).environmentObject(ACTValueTrainingInputModel())
+                template(category: "Health", idealAction: $idealAction_health, idealLevel: $idealLevel_health, achivementLevel: $achivementLevel_health).environmentObject(ACTValueTrainingInputModel())
             }
             Button(action : { self.show.toggle() }) {
                Text("OK")
@@ -71,35 +68,86 @@ struct ACTValueTrainingInput_View: View {
 }
 
 struct template: View {
+    @EnvironmentObject var model: ACTValueTrainingInputModel
     var category: String
     @Binding var idealAction: String
     @Binding var idealLevel: Int
     @Binding var achivementLevel: Int
     
     var body: some View {
-        Text("\(category)")
-            .listRowBackground(Color.teal)
-            .listRowSeparator(.hidden)
-            .frame(maxWidth: .infinity ,alignment: .center)
-        
-        Text("Please write ideal action about \"\(category)\"")
-            .font(.subheadline)
-        TextField("Ideal action about \(category)", text: $idealAction, axis: .vertical)
-            .listRowSeparator(.hidden)
-            
-        Text("Please rate the ideal level and achievement level for the above contents on a 10-point scale")
-        .font(.subheadline)
-        .listRowSeparator(.hidden)
-        
-        HStack {
-            Picker("Ideal level", selection: $idealLevel) {
-                ForEach(1..<11, id: \.self) {
-                    Text("\($0)")
+        ForEach(0 ..< model.values.count, id: \.self) { i in
+            if(model.values[i].category == category) {
+                Text("\(category)")
+                    .listRowBackground(Color.teal)
+                    .listRowSeparator(.hidden)
+                    .frame(maxWidth: .infinity ,alignment: .center)
+                
+                Text("Please write ideal action about \"\(category)\"")
+                    .font(.subheadline)
+                TextField("Ideal action about \(category)", text: $idealAction, axis: .vertical)
+                    .listRowSeparator(.hidden)
+                    .onAppear(){
+                        if(self.idealAction == ""){
+                            self.idealAction = model.values[i].idealAction
+                        }
+                    }
+                
+                Text("Please rate the ideal level and achievement level for the above contents on a 10-point scale")
+                    .font(.subheadline)
+                    .listRowSeparator(.hidden)
+                
+                HStack {
+                    
+                    Picker("Ideal level", selection: $idealLevel) {
+                        ForEach(1..<11, id: \.self) {
+                            Text("\($0)")
+                        }
+                    }
+                    .onAppear(){
+                        if(self.idealLevel == 1){
+                            self.idealLevel = model.values[i].idealLevel
+                        }
+                    }
+                    Picker("Achivement Level", selection: $achivementLevel) {
+                        ForEach(1..<11, id: \.self) {
+                            Text("\($0)")
+                        }
+                    }
+                    .onAppear(){
+                        if(self.achivementLevel == 1){
+                            self.achivementLevel = model.values[i].achivementLevel
+                        }
+                    }
                 }
             }
-            Picker("Achivement Level", selection: $achivementLevel) {
-                ForEach(1..<11, id: \.self) {
-                    Text("\($0)")
+        }
+        
+        if(model.values.count == 0) {
+            Text("\(category)")
+                .listRowBackground(Color.teal)
+                .listRowSeparator(.hidden)
+                .frame(maxWidth: .infinity ,alignment: .center)
+            
+            Text("Please write ideal action about \"\(category)\"")
+                .font(.subheadline)
+            TextField("Ideal action about \(category)", text: $idealAction, axis: .vertical)
+                .listRowSeparator(.hidden)
+                                
+            Text("Please rate the ideal level and achievement level for the above contents on a 10-point scale")
+                .font(.subheadline)
+                .listRowSeparator(.hidden)
+            
+            HStack {
+                
+                Picker("Ideal level", selection: $idealLevel) {
+                    ForEach(1..<11, id: \.self) {
+                        Text("\($0)")
+                    }
+                }
+                Picker("Achivement Level", selection: $achivementLevel) {
+                    ForEach(1..<11, id: \.self) {
+                        Text("\($0)")
+                    }
                 }
             }
         }
@@ -107,7 +155,7 @@ struct template: View {
 }
 
 struct ACTValueTrainingInput_View_Previews: PreviewProvider {
-    static var model = ACTValueTrainingManagementModel()
+    static var model = ACTValueTrainingInputModel()
     static var previews: some View {
         ACTValueTrainingInput_View().environmentObject(model)
     }

@@ -31,6 +31,14 @@ class CRUDFactory: Factory {
             let returnRequest = ACTValueTrainingRequest(request: request)
             return ACTValueTrainingController(request: returnRequest, userId: userId, value: value).mockCreateValueData()
         
+        case "READ_INIT_ACTVALUETRAINING_DATA":
+            let returnRequest = ACTValueTrainingRequest(request: request)
+            return ACTValueTrainingController(request: returnRequest, userId: userId, value: value).readInitValueData()
+            
+        case "MOCKREAD_INIT_ACTVALUETRAINING_DATA":
+            let returnRequest = ACTValueTrainingRequest(request: request)
+            return ACTValueTrainingController(request: returnRequest, userId: userId, value: value).mockReadInitValueData()
+            
         case "READ_ACTVALUETRAINING_DATA":
             let returnRequest = ACTValueTrainingRequest(request: request)
             return ACTValueTrainingController(request: returnRequest, userId: userId, value: value).readValueData()
@@ -39,13 +47,13 @@ class CRUDFactory: Factory {
             let returnRequest = ACTValueTrainingRequest(request: request)
             return ACTValueTrainingController(request: returnRequest, userId: userId, value: value).mockReadValueData()
             
-        case "READ_INIT_ACTVALUETRAINING_DATA":
+        case "READ_ALL_ACTVALUETRAINING_DATA":
             let returnRequest = ACTValueTrainingRequest(request: request)
-            return ACTValueTrainingController(request: returnRequest, userId: userId, value: value).readInitValueData()
+            return ACTValueTrainingController(request: returnRequest, userId: userId, value: value).readValuesData()
             
-        case "MOCKREAD_INIT_ACTVALUETRAINING_DATA":
+        case "MOCKREAD_ALL_ACTVALUETRAINING_DATA":
             let returnRequest = ACTValueTrainingRequest(request: request)
-            return ACTValueTrainingController(request: returnRequest, userId: userId, value: value).mockReadInitValueData()
+            return ACTValueTrainingController(request: returnRequest, userId: userId, value: value).mockReadValuesData()
             
         case "UPDATE_ACTVALUETRAINING_DATA":
             let returnRequest = ACTValueTrainingRequest(request: request)

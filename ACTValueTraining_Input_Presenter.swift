@@ -1,19 +1,19 @@
 //
-//  ACTValueTrainingManagement_Presenter.swift
+//  ACTValueTraining_Input_Presenter.swift
 //  JACK
 //
-//  Created by Sato Masataka on 2022/04/21.
+//  Created by Sato Masataka on 2022/12/13.
 //
 
 import Foundation
 import SwiftUI
 import RealmSwift
 
-protocol ACTValueTrainingManagementView {
+protocol ACTValueTrainingInputView {
 //    func crickResistantButton(dataSet: [ACTValueTrainingSelectModel]) -> String
 }
 
-class ACTValueTrainingManagementPresenter: ACTValueTrainingPresenter {
+class ACTValueTrainingInputPresenter: ACTValueTrainingPresenter {
     func connectViewDataToController(dataSet: [ACTValueTrainingSelectModel]) -> String {
 
         var result          = ""
@@ -27,21 +27,14 @@ class ACTValueTrainingManagementPresenter: ACTValueTrainingPresenter {
     
 }
 
-//struct ACTValueTrainingManagementModel {
-//    var value               : String
-//    var achivementLevel     : Int
-//    var idealLevel          : Int
-//    var selectedTargetFlag  : Bool
-//    var request             : String
-//}
-
-class ACTValueTrainingManagementModel: ObservableObject {
+class ACTValueTrainingInputModel: ObservableObject {
     @Published var values = [ACTValue()]
     init() {
-        let request = ACTValueTrainingRequest(request: "READ_INIT_ACTVALUETRAINING_DATA")
+        let request = ACTValueTrainingRequest(request: "READ_ALL_ACTVALUETRAINING_DATA")
         let uer = UserInfo()
         uer.userId = 1
         let value = ACTValue()
         values = ACTValueTrainingController(request: request, userId: uer.userId, value: value).controllARequest() as! [ACTValue]
     }
 }
+

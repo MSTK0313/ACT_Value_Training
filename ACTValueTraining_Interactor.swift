@@ -17,6 +17,8 @@ protocol ACTValueTrainingRequester {
     func mockReadInitValues() -> [ACTValue]
     func readValue() -> ACTValue
     func mockReadValue() -> ACTValue
+    func readValues() -> [ACTValue]
+    func mockReadValues() -> [ACTValue]
     func updateValue() -> ACTValueTrainingResponse
     func mockUpdateValue() -> ACTValueTrainingResponse
     func deleteValue() -> ACTValueTrainingResponse
@@ -47,25 +49,17 @@ class ACTValueTraining: ACTValueTrainingRequester {
     }
     
     
-    func readValue() -> ACTValue {
-        var result = ACTValue()
-        
-        result = ACTValueTrainingDataMapper(realm: RealmBorderline().toSetDefault(), userId: userId, value: value).readValue()
-        return result
-        
-    }
-    func mockReadValue() -> ACTValue {
-        let result = ACTValue()
-        
-        return result
-    }
-    
-    
     func readInitValues() -> [ACTValue] {
         var result = [ACTValue()]
+        var filteredResult = [ACTValue()]
         
-        result = ACTValueTrainingDataMapper(realm: RealmBorderline().toSetDefault(), userId: userId, value: value).readInitValues()
-        return result
+        result = ACTValueTrainingDataMapper(realm: RealmBorderline().toSetDefault(), userId: userId, value: value).readValues()
+        for i in 0 ..< result.count {
+            if result[i].selectFlag == true {
+                filteredResult.append(result[i])
+            }
+        }
+        return filteredResult
     }
     
     func mockReadInitValues() -> [ACTValue] {
@@ -75,7 +69,64 @@ class ACTValueTraining: ACTValueTrainingRequester {
         result.removeFirst()
         result.append(test)
         result.append(test2)
-//        result = ACTValueTrainingDataMapper(realm: RealmBorderline().toSetDefault(), userId: userId, value: value).readInitValues()
+        
+        return result
+    }
+    
+    
+    func readValue() -> ACTValue {
+        var result = [ACTValue()]
+        var filteredResult = ACTValue()
+        
+        result = ACTValueTrainingDataMapper(realm: RealmBorderline().toSetDefault(), userId: userId, value: value).readValues()
+        
+        for i in 0 ..< result.count {
+            if result[i].category == value.category {
+                filteredResult = result[i]
+            }
+        }
+        return filteredResult        
+    }
+    
+    func mockReadValue() -> ACTValue {
+        let result = ACTValue()
+        
+        return result
+    }
+    
+    
+    func readValues() -> [ACTValue] {
+        var result = [ACTValue()]
+        result = ACTValueTrainingDataMapper(realm: RealmBorderline().toSetDefault(), userId: userId, value: value).readValues()
+        
+        return result
+    }
+    
+    func mockReadValues() -> [ACTValue] {
+        var result = [ACTValue()]
+        let family = ACTValue(value: ["category": "Family", "idealAction": "I want to pass the test", "idealLevel": 1, "achivementLevel": 2, "selectFlag": false])
+        let lover = ACTValue(value: ["category": "Lover", "idealAction": "How much can this section explore words?", "idealLevel": 10, "achivementLevel": 5, "selectFlag": true])
+        let nuture = ACTValue(value: ["category": "Nuture", "idealAction": "Does Nuture view on screen?", "idealLevel": 1, "achivementLevel": 2, "selectFlag": false])
+        let friends = ACTValue(value: ["category": "Friends", "idealAction": "Does Friends view on screen?", "idealLevel": 1, "achivementLevel": 2, "selectFlag": false])
+        let work = ACTValue(value: ["category": "Work", "idealAction": "Does Work view on screen?", "idealLevel": 8, "achivementLevel": 2, "selectFlag": true])
+        let grows = ACTValue(value: ["category": "Grows", "idealAction": "Does Grows view on screen?", "idealLevel": 6, "achivementLevel": 2, "selectFlag": true])
+        let hobby = ACTValue(value: ["category": "Hobby", "idealAction": "Does Hobby view on screen?", "idealLevel": 1, "achivementLevel": 2, "selectFlag": false])
+        let mentality = ACTValue(value: ["category": "Mentality", "idealAction": "Does Mentality view on screen?", "idealLevel": 1, "achivementLevel": 2, "selectFlag": false])
+        let community = ACTValue(value: ["category": "Community", "idealAction": "Does Community view on screen?", "idealLevel": 2, "achivementLevel": 2, "selectFlag": false])
+        let health = ACTValue(value: ["category": "Health", "idealAction": "Does Health view on screen?", "idealLevel": 1, "achivementLevel": 2, "selectFlag": false])
+        
+        result.removeFirst()
+        result.append(family)
+        result.append(lover)
+        result.append(nuture)
+        result.append(friends)
+        result.append(work)
+        result.append(grows)
+        result.append(hobby)
+        result.append(mentality)
+        result.append(community)
+        result.append(health)
+        
         return result
     }
     
@@ -132,8 +183,7 @@ protocol ACTValueTrainingGateway {
     var userId: Int { get }
     var value: ACTValue { get }
     func createValue() -> ACTValueTrainingResponse
-    func readValue() -> ACTValue
-    func readInitValues() -> [ACTValue]
+    func readValues() -> [ACTValue]
     func updateValue() -> ACTValueTrainingResponse
     func deleteValue() -> ACTValueTrainingResponse
     func commitOrRollbackAndReturnResult() -> ACTValueTrainingResponse
