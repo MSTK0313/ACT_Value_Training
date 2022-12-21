@@ -6,14 +6,18 @@
 //
 
 import SwiftUI
+import GoogleSignInSwift
+import GoogleSignIn
 
 struct Login_View: View {
+    @EnvironmentObject var authViewModel: AuthenticationViewModel
     @State var show = false
+    
     var body: some View {
-        Button(action : { self.show.toggle() }) {
-           Text("Sign in with Apple")
+        VStack {
+            GoogleSignInButton(action: action: authViewModel.signIn)
+                .accessibilityIdentifier("GoogleSignInButton")
         }
-       .buttonStyle(OK_ButtonStyle())
     }
 }
 
@@ -22,3 +26,6 @@ struct Login_View_Previews: PreviewProvider {
         Login_View()
     }
 }
+
+
+

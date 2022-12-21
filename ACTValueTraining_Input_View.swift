@@ -61,7 +61,7 @@ struct ACTValueTrainingInput_View: View {
             }
            .buttonStyle(OK_ButtonStyle())
            .fullScreenCover(isPresented: self.$show) {
-               ACTValueTrainingSelect_View(idealAction_family: $idealAction_family, idealLevel_family: $idealLevel_family, achivementLevel_family: $achivementLevel_family,idealAction_lover: $idealAction_lover,idealLevel_lover: $idealLevel_lover,achivementLevel_lover: $achivementLevel_lover,idealAction_nurture: $idealAction_nurture,idealLevel_nurture: $idealLevel_nurture,achivementLevel_nurture: $achivementLevel_nurture,idealAction_friend: $idealAction_friend,idealLevel_friend: $idealLevel_friend,achivementLevel_friend: $achivementLevel_friend,idealAction_work: $idealAction_work,idealLevel_work: $idealLevel_work,achivementLevel_work: $achivementLevel_work,idealAction_grows:$idealAction_grows,idealLevel_grows: $idealLevel_grows,achivementLevel_grows: $achivementLevel_grows,idealAction_hobby:$idealAction_hobby,idealLevel_hobby: $idealLevel_hobby,achivementLevel_hobby: $achivementLevel_hobby,idealAction_mental: $idealAction_mental,idealLevel_mental: $idealLevel_mental,achivementLevel_mental: $achivementLevel_mental,idealAction_community: $idealAction_community,idealLevel_community: $idealLevel_community,achivementLevel_community: $achivementLevel_community,idealAction_health: $idealAction_health,idealLevel_health: $idealLevel_health,achivementLevel_health: $achivementLevel_health)
+               ACTValueTrainingSelect_View(idealAction_family: $idealAction_family, idealLevel_family: $idealLevel_family, achivementLevel_family: $achivementLevel_family,idealAction_lover: $idealAction_lover,idealLevel_lover: $idealLevel_lover,achivementLevel_lover: $achivementLevel_lover,idealAction_nurture: $idealAction_nurture,idealLevel_nurture: $idealLevel_nurture,achivementLevel_nurture: $achivementLevel_nurture,idealAction_friend: $idealAction_friend,idealLevel_friend: $idealLevel_friend,achivementLevel_friend: $achivementLevel_friend,idealAction_work: $idealAction_work,idealLevel_work: $idealLevel_work,achivementLevel_work: $achivementLevel_work,idealAction_grows:$idealAction_grows,idealLevel_grows: $idealLevel_grows,achivementLevel_grows: $achivementLevel_grows,idealAction_hobby:$idealAction_hobby,idealLevel_hobby: $idealLevel_hobby,achivementLevel_hobby: $achivementLevel_hobby,idealAction_mental: $idealAction_mental,idealLevel_mental: $idealLevel_mental,achivementLevel_mental: $achivementLevel_mental,idealAction_community: $idealAction_community,idealLevel_community: $idealLevel_community,achivementLevel_community: $achivementLevel_community,idealAction_health: $idealAction_health,idealLevel_health: $idealLevel_health,achivementLevel_health: $achivementLevel_health).environmentObject(ACTValueTrainingInputModel())
             }
         }
     }
@@ -75,54 +75,56 @@ struct template: View {
     @Binding var achivementLevel: Int
     
     var body: some View {
-        ForEach(0 ..< model.values.count, id: \.self) { i in
-            if(model.values[i].category == category) {
-                Text("\(category)")
-                    .listRowBackground(Color.teal)
-                    .listRowSeparator(.hidden)
-                    .frame(maxWidth: .infinity ,alignment: .center)
-                
-                Text("Please write ideal action about \"\(category)\"")
-                    .font(.subheadline)
-                TextField("Ideal action about \(category)", text: $idealAction, axis: .vertical)
-                    .listRowSeparator(.hidden)
-                    .onAppear(){
-                        if(self.idealAction == ""){
-                            self.idealAction = model.values[i].idealAction
-                        }
-                    }
-                
-                Text("Please rate the ideal level and achievement level for the above contents on a 10-point scale")
-                    .font(.subheadline)
-                    .listRowSeparator(.hidden)
-                
-                HStack {
+        if (model.values.count > 0) {
+            ForEach(0 ..< model.values.count, id: \.self) { i in
+                if(model.values[i].category == category) {
+                    Text("\(category)")
+                        .listRowBackground(Color.teal)
+                        .listRowSeparator(.hidden)
+                        .frame(maxWidth: .infinity ,alignment: .center)
                     
-                    Picker("Ideal level", selection: $idealLevel) {
-                        ForEach(1..<11, id: \.self) {
-                            Text("\($0)")
+                    Text("Please write ideal action about \"\(category)\"")
+                        .font(.subheadline)
+                    TextField("Ideal action about \(category)", text: $idealAction, axis: .vertical)
+                        .listRowSeparator(.hidden)
+                        .onAppear(){
+                            if(self.idealAction == ""){
+                                self.idealAction = model.values[i].idealAction
+                            }
                         }
-                    }
-                    .onAppear(){
-                        if(self.idealLevel == 1){
-                            self.idealLevel = model.values[i].idealLevel
+                    
+                    Text("Please rate the ideal level and achievement level for the above contents on a 10-point scale")
+                        .font(.subheadline)
+                        .listRowSeparator(.hidden)
+                    
+                    HStack {
+                        
+                        Picker("Ideal level", selection: $idealLevel) {
+                            ForEach(1..<11, id: \.self) {
+                                Text("\($0)")
+                            }
                         }
-                    }
-                    Picker("Achivement Level", selection: $achivementLevel) {
-                        ForEach(1..<11, id: \.self) {
-                            Text("\($0)")
+                        .onAppear(){
+                            if(self.idealLevel == 1){
+                                self.idealLevel = model.values[i].idealLevel
+                            }
                         }
-                    }
-                    .onAppear(){
-                        if(self.achivementLevel == 1){
-                            self.achivementLevel = model.values[i].achivementLevel
+                        Picker("Achivement Level", selection: $achivementLevel) {
+                            ForEach(1..<11, id: \.self) {
+                                Text("\($0)")
+                            }
+                        }
+                        .onAppear(){
+                            if(self.achivementLevel == 1){
+                                self.achivementLevel = model.values[i].achivementLevel
+                            }
                         }
                     }
                 }
             }
         }
         
-        if(model.values.count == 0) {
+        else if (model.values.count == 0) {
             Text("\(category)")
                 .listRowBackground(Color.teal)
                 .listRowSeparator(.hidden)

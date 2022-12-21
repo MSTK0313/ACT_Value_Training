@@ -20,7 +20,6 @@ class ACTValueTrainingSelectPresenter: ACTValueTrainingPresenter {
         var result = ""
         for data in dataSet {
             result = ACTValueTrainingController(request: data.request, userId: 1, value: data.value).controllARequest() as! String
-            print(result)
         }
         return result
     }
@@ -29,3 +28,4 @@ class ACTValueTrainingSelectPresenter: ACTValueTrainingPresenter {
 protocol ACTValueTrainingSelectView {
     func crickResistantButton(dataSet: [ACTValueTrainingSelectModel]) -> String
 }
+

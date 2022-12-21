@@ -24,10 +24,10 @@ class ACTValueTrainingDataMapper: ACTValueTrainingGateway{
         let filterUserInfoByUserId = realm.object(ofType: UserInfo.self, forPrimaryKey: userId)
         let filterValuesByValue = filterUserInfoByUserId?.values.filter("category = %@", value.category).first
         
-        if (filterUserInfoByUserId != nil) {
+        if (filterUserInfoByUserId != nil && filterValuesByValue == nil) {
             realm.beginWrite()
             filterUserInfoByUserId?.values.append(value)
-            realm.add(filterUserInfoByUserId!, update: .modified)
+            realm.add(filterUserInfoByUserId!)
             
             result = commitOrRollbackAndReturnResult()
         }

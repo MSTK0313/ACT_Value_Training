@@ -43,5 +43,6 @@ class ACTValueTrainingManagementModel: ObservableObject {
         uer.userId = 1
         let value = ACTValue()
         values = ACTValueTrainingController(request: request, userId: uer.userId, value: value).controllARequest() as! [ACTValue]
+        values.removeFirst()
     }
 }

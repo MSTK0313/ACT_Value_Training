@@ -14,19 +14,24 @@ struct ACTValueTrainingManagement_View: View {
     var body: some View {
         VStack {
             List{
-                if (model.values.count != 0) {
+                if (model.values.count > 0) {
                     ForEach(0 ..< model.values.count, id: \.self) { i in
                         Section(header: Text("\(model.values[i].category)")) {
                             Text("\(model.values[i].idealAction)")
                         }
                     }
                 }
-                else {
+                else if (model.values.count == 0) {
                     Text("Please add values")
                 }
             }
             Button(action: { self.show.toggle() }) {
-                Text("Add")
+                if (model.values.count > 0) {
+                    Text("Change")
+                }
+                else if (model.values.count == 0) {
+                    Text("Add")
+                }
             }
             .buttonStyle(OK_ButtonStyle())
             .fullScreenCover(isPresented: self.$show) {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ACTValueTrainingSelect_View: View {
-    
+    @EnvironmentObject var model: ACTValueTrainingInputModel
     @Binding var idealAction_family: String
     @Binding var idealLevel_family: Int
     @Binding var achivementLevel_family: Int
@@ -45,13 +45,12 @@ struct ACTValueTrainingSelect_View: View {
     let data = [1,2,3,4,5,6,7,8,9]
     let values = ["Family","Lover","Nurture","Friends","Work","Grows","Hobby","Mentality","Community","Health"]
     
-    //TODO: すでにデータがある状態だと、Updateを呼ばないといけない
     @State private var selectionValue: Set<String> = []
+    
     var body: some View {
         VStack {
             Section {
-                Text("Please select 3-5 what you want to focus on values\n")
-                Text("Selected: \(selectionValue.description)")
+                Text("Please select 3-5 values what you want to focus on.")
                 List (selection: $selectionValue) {
                     Text(values[0] + " :\n\(idealAction_family) \nIdeal level : \(idealLevel_family)\tAchivement level : \(achivementLevel_family)").tag(values[0]).lineLimit(nil)
                     Text(values[1] + " :\n\(idealAction_lover) \nIdeal level : \(idealLevel_lover)\tAchivement level : \(achivementLevel_lover)").tag(values[1]).lineLimit(nil)
@@ -75,7 +74,7 @@ struct ACTValueTrainingSelect_View: View {
                 }
                .buttonStyle(OK_ButtonStyle())
                .fullScreenCover(isPresented: self.$show) {
-                   ACTValueTrainingManagement_View()
+                   ACTValueTrainingManagement_View().environmentObject(ACTValueTrainingManagementModel())
                }
             }
         }
@@ -83,8 +82,15 @@ struct ACTValueTrainingSelect_View: View {
 
     func flagCheck(flags: Set<String>) -> [ACTValueTrainingSelectModel] {
         var dataSet = [ACTValueTrainingSelectModel(request: ACTValueTrainingRequest(request: ""), user: UserInfo(), value: ACTValue())]
-        let request = ACTValueTrainingRequest(request: "CREATE_ACTVALUETRAINING_DATA")
+        var request = ACTValueTrainingRequest(request: "")
         let uer = UserInfo()
+
+        if (model.values.count == 0) {
+            request.request = "CREATE_ACTVALUETRAINING_DATA"
+        }
+        else if (model.values.count > 0) {
+            request.request = "UPDATE_ACTVALUETRAINING_DATA"
+        }
         
         let value_family = ACTValue()
         value_family.category = "Family"

@@ -18,8 +18,8 @@ protocol ACTValueTrainingRequestControlled {
     func mockReadValueData() -> ACTValue
     func readValuesData() -> [ACTValue]
     func mockReadValuesData() -> [ACTValue]
-    func updateValueData() -> ACTValueTrainingResponse
-    func mockUpdateValueData() -> ACTValueTrainingResponse
+    func updateValueData() -> String
+    func mockUpdateValueData() -> String
     func deleteValueData() -> String
     func mockDeleteValueData() -> String
 }
@@ -85,13 +85,14 @@ class ACTValueTrainingController: ACTValueTrainingRequestControlled {
     }
     
     
-    func updateValueData() -> ACTValueTrainingResponse {
+    func updateValueData() -> String {
         let result = ACTValueTraining(userId: userId, value: value).updateValue()
-        return result
+        return result.result
     }
-    func mockUpdateValueData() -> ACTValueTrainingResponse {
+    
+    func mockUpdateValueData() -> String {
         let result = ACTValueTraining(userId: userId, value: value).mockUpdateValue()
-        return result
+        return result.result
     }
     
     

@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import GoogleSignIn
 
 protocol ACTValueTrainingRequester {
     var userId: Int { get }
