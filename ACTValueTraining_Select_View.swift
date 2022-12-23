@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GoogleSignIn
 
 struct ACTValueTrainingSelect_View: View {
     @EnvironmentObject var model: ACTValueTrainingInputModel
@@ -45,7 +46,12 @@ struct ACTValueTrainingSelect_View: View {
     let data = [1,2,3,4,5,6,7,8,9]
     let values = ["Family","Lover","Nurture","Friends","Work","Grows","Hobby","Mentality","Community","Health"]
     
+    
     @State private var selectionValue: Set<String> = []
+    
+    private var user: GIDGoogleUser? {
+      return GIDSignIn.sharedInstance.currentUser
+    }
     
     var body: some View {
         VStack {
@@ -84,6 +90,7 @@ struct ACTValueTrainingSelect_View: View {
         var dataSet = [ACTValueTrainingSelectModel(request: ACTValueTrainingRequest(request: ""), user: UserInfo(), value: ACTValue())]
         var request = ACTValueTrainingRequest(request: "")
         let uer = UserInfo()
+//        uer.userId = user?.profile?.email
 
         if (model.values.count == 0) {
             request.request = "CREATE_ACTVALUETRAINING_DATA"
