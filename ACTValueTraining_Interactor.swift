@@ -10,7 +10,7 @@ import RealmSwift
 import GoogleSignIn
 
 protocol ACTValueTrainingRequester {
-    var userId: Int { get }
+    var userId: String { get }
     var value: ACTValue { get }
     func createValue() -> ACTValueTrainingResponse
     func mockCreateValue() -> ACTValueTrainingResponse
@@ -27,10 +27,10 @@ protocol ACTValueTrainingRequester {
 }
 
 class ACTValueTraining: ACTValueTrainingRequester {
-    var userId: Int
+    var userId: String
     var value: ACTValue
     
-    init(userId: Int, value: ACTValue) {
+    init(userId: String, value: ACTValue) {
         self.userId = userId
         self.value = value
     }
@@ -181,7 +181,7 @@ extension ACTValueTrainingResponse: Equatable {
 }
 
 protocol ACTValueTrainingGateway {
-    var userId: Int { get }
+    var userId: String { get }
     var value: ACTValue { get }
     func createValue() -> ACTValueTrainingResponse
     func readValues() -> [ACTValue]

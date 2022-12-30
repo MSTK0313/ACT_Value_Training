@@ -11,7 +11,7 @@ import RealmSwift
 
 struct ACTValueTrainingSelectModel {
     var request: ACTValueTrainingRequest
-    var user: UserInfo
+    var userInfo: UserInfo
     var value: ACTValue
 }
 
@@ -19,7 +19,7 @@ class ACTValueTrainingSelectPresenter: ACTValueTrainingPresenter {
     func connectViewDataToController(dataSet: [ACTValueTrainingSelectModel]) -> String {
         var result = ""
         for data in dataSet {
-            result = ACTValueTrainingController(request: data.request, userId: 1, value: data.value).controllARequest() as! String
+            result = ACTValueTrainingController(request: data.request, userInfo: data.userInfo, value: data.value).controllARequest() as! String
         }
         return result
     }

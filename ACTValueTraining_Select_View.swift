@@ -87,10 +87,9 @@ struct ACTValueTrainingSelect_View: View {
     }
 
     func flagCheck(flags: Set<String>) -> [ACTValueTrainingSelectModel] {
-        var dataSet = [ACTValueTrainingSelectModel(request: ACTValueTrainingRequest(request: ""), user: UserInfo(), value: ACTValue())]
+        var dataSet = [ACTValueTrainingSelectModel(request: ACTValueTrainingRequest(request: ""), userInfo: UserInfo(), value: ACTValue())]
         var request = ACTValueTrainingRequest(request: "")
-        let uer = UserInfo()
-//        uer.userId = user?.profile?.email
+        let userInfo = UserInfoManagementViewPresenter().readUserInfo()
 
         if (model.values.count == 0) {
             request.request = "CREATE_ACTVALUETRAINING_DATA"
@@ -113,7 +112,7 @@ struct ACTValueTrainingSelect_View: View {
                 value_family.selectFlag = false
             }
         }
-        dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value_family))
+        dataSet.append(ACTValueTrainingSelectModel(request: request, userInfo: userInfo, value: value_family))
              
         let value_lover = ACTValue()
         value_lover.category = "Lover"
@@ -129,7 +128,7 @@ struct ACTValueTrainingSelect_View: View {
                 value_lover.selectFlag = false
             }
         }
-        dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value_lover))
+        dataSet.append(ACTValueTrainingSelectModel(request: request, userInfo: userInfo, value: value_lover))
             
             
         let value_nurture = ACTValue()
@@ -146,7 +145,7 @@ struct ACTValueTrainingSelect_View: View {
                 value_nurture.selectFlag = false
             }
         }
-        dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value_nurture))
+        dataSet.append(ACTValueTrainingSelectModel(request: request, userInfo: userInfo, value: value_nurture))
             
         let value_friends = ACTValue()
         value_friends.category = "Friends"
@@ -162,7 +161,7 @@ struct ACTValueTrainingSelect_View: View {
                 value_friends.selectFlag = false
             }
         }
-        dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value_friends))
+        dataSet.append(ACTValueTrainingSelectModel(request: request, userInfo: userInfo, value: value_friends))
             
         let value_work = ACTValue()
         value_work.category = "Work"
@@ -178,7 +177,7 @@ struct ACTValueTrainingSelect_View: View {
                 value_work.selectFlag = false
             }
         }
-        dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value_work))
+        dataSet.append(ACTValueTrainingSelectModel(request: request, userInfo: userInfo, value: value_work))
             
         let value_grows = ACTValue()
         value_grows.category = "Grows"
@@ -194,7 +193,7 @@ struct ACTValueTrainingSelect_View: View {
                 value_grows.selectFlag = false
             }
         }
-        dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value_grows))
+        dataSet.append(ACTValueTrainingSelectModel(request: request, userInfo: userInfo, value: value_grows))
             
         let value_hobby = ACTValue()
         value_hobby.category = "Hobby"
@@ -210,7 +209,7 @@ struct ACTValueTrainingSelect_View: View {
                 value_hobby.selectFlag = false
             }
         }
-        dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value_hobby))
+        dataSet.append(ACTValueTrainingSelectModel(request: request, userInfo: userInfo, value: value_hobby))
             
         let value_mentality = ACTValue()
         value_mentality.category = "Mentality"
@@ -226,7 +225,7 @@ struct ACTValueTrainingSelect_View: View {
                 value_mentality.selectFlag = false
             }
         }
-        dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value_mentality))
+        dataSet.append(ACTValueTrainingSelectModel(request: request, userInfo: userInfo, value: value_mentality))
             
         let value_community = ACTValue()
         value_community.category = "Community"
@@ -242,7 +241,7 @@ struct ACTValueTrainingSelect_View: View {
                 value_community.selectFlag = false
             }
         }
-        dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value_community))
+        dataSet.append(ACTValueTrainingSelectModel(request: request, userInfo: userInfo, value: value_community))
             
         let value_health = ACTValue()
         value_health.category = "Health"
@@ -258,7 +257,7 @@ struct ACTValueTrainingSelect_View: View {
                 value_health.selectFlag = false
             }
         }
-        dataSet.append(ACTValueTrainingSelectModel(request: request, user: uer, value: value_health))
+        dataSet.append(ACTValueTrainingSelectModel(request: request, userInfo: userInfo, value: value_health))
         
         dataSet.removeFirst()
         return dataSet

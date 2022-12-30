@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 //import RealmSwift
 
 class SwiftBorderline {
@@ -43,5 +44,15 @@ class SwiftBorderline {
     func compareDayWithDay(day1: Date, day2: Date) -> Bool {
         let returnBool = Calendar.current.isDate(day1, equalTo: day2, toGranularity: .day)
         return returnBool
+    }
+    
+    func getUniqueID() -> String {
+        let uniqueID = UUID().uuidString
+        return uniqueID
+    }
+    
+    func getMockUniqueID() -> String {
+        let uniqueID = UIDevice.current.identifierForVendor!.uuidString
+        return uniqueID
     }
 }

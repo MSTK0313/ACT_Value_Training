@@ -26,82 +26,82 @@ protocol ACTValueTrainingRequestControlled {
 
 class ACTValueTrainingController: ACTValueTrainingRequestControlled {
     var request: ACTValueTrainingRequest
-    var userId: Int
+    var userInfo: UserInfo
     var value: ACTValue
     
-    init (request: ACTValueTrainingRequest, userId: Int, value: ACTValue) {
+    init (request: ACTValueTrainingRequest, userInfo: UserInfo, value: ACTValue) {
         self.request = request
-        self.userId = userId
+        self.userInfo = userInfo
         self.value = value
     }
     
     func controllARequest() -> Any {
-        let resultOfRequest = CRUDFactory(userId: userId, value: value).handleTheRequest(request: request.request)
+        let resultOfRequest = CRUDFactory(userInfo: userInfo, value: value).handleTheRequest(request: request.request)
         return resultOfRequest
     }
     
     
     func createValueData() -> String {
-        let result = ACTValueTraining(userId: userId, value: value).createValue()
+        let result = ACTValueTraining(userId: userInfo.userId, value: value).createValue()
         
         return result.result
     }
     func mockCreateValueData() -> String {
-        let result = ACTValueTraining(userId: userId, value: value).mockCreateValue()
+        let result = ACTValueTraining(userId: userInfo.userId, value: value).mockCreateValue()
         
         return result.result
     }
     
     
     func readInitValueData() -> [ACTValue] {
-        let result = ACTValueTraining(userId: userId, value: value).readInitValues()
+        let result = ACTValueTraining(userId: userInfo.userId, value: value).readInitValues()
         return result
     }
     
     func mockReadInitValueData() -> [ACTValue] {
-        let result = ACTValueTraining(userId: userId, value: value).mockReadInitValues()
+        let result = ACTValueTraining(userId: userInfo.userId, value: value).mockReadInitValues()
         return result
     }
     
     
     func readValueData() -> ACTValue {
-        let result = ACTValueTraining(userId: userId, value: value).readValue()
+        let result = ACTValueTraining(userId: userInfo.userId, value: value).readValue()
         return result
     }
     func mockReadValueData() -> ACTValue {
-        let result = ACTValueTraining(userId: userId, value: value).mockReadValue()
+        let result = ACTValueTraining(userId: userInfo.userId, value: value).mockReadValue()
         return result
     }
     
     
     func readValuesData() -> [ACTValue] {
-        let result = ACTValueTraining(userId: userId, value: value).readValues()
+        let result = ACTValueTraining(userId: userInfo.userId, value: value).readValues()
         return result
     }
     
     func mockReadValuesData() -> [ACTValue] {
-        let result = ACTValueTraining(userId: userId, value: value).mockReadValues()
+        let result = ACTValueTraining(userId: userInfo.userId, value: value).mockReadValues()
         return result
     }
     
     
     func updateValueData() -> String {
-        let result = ACTValueTraining(userId: userId, value: value).updateValue()
+        let result = ACTValueTraining(userId: userInfo.userId, value: value).updateValue()
         return result.result
     }
     
     func mockUpdateValueData() -> String {
-        let result = ACTValueTraining(userId: userId, value: value).mockUpdateValue()
+        let result = ACTValueTraining(userId: userInfo.userId, value: value).mockUpdateValue()
         return result.result
     }
     
     
     func deleteValueData() -> String {
-        let result = ACTValueTraining(userId: userId, value: value).deleteValue()
+        let result = ACTValueTraining(userId: userInfo.userId, value: value).deleteValue()
         return result.result
     }
     func mockDeleteValueData() -> String {
-        let result = ACTValueTraining(userId: userId, value: value).mockDeleteValue()
+        let result = ACTValueTraining(userId: userInfo.userId, value: value).mockDeleteValue()
         return result.result
     }
 }

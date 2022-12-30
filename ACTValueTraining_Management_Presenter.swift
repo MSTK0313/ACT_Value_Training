@@ -39,10 +39,10 @@ class ACTValueTrainingManagementModel: ObservableObject {
     @Published var values = [ACTValue()]
     init() {
         let request = ACTValueTrainingRequest(request: "READ_INIT_ACTVALUETRAINING_DATA")
-        let uer = UserInfo()
-        uer.userId = 1
+        let userInfo = UserInfo()
+        userInfo.userId = UserInfoManagementViewPresenter().readUserInfo().userId
         let value = ACTValue()
-        values = ACTValueTrainingController(request: request, userId: uer.userId, value: value).controllARequest() as! [ACTValue]
+        values = ACTValueTrainingController(request: request, userInfo: userInfo, value: value).controllARequest() as! [ACTValue]
         values.removeFirst()
     }
 }

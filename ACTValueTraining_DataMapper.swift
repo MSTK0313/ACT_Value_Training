@@ -11,10 +11,10 @@ import RealmSwift
 class ACTValueTrainingDataMapper: ACTValueTrainingGateway{
     let realm: Realm
     var result = ACTValueTrainingResponse(result: "")
-    let userId: Int
+    let userId: String
     let value: ACTValue
     
-    init(realm: Realm, userId: Int, value: ACTValue) {
+    init(realm: Realm, userId: String, value: ACTValue) {
         self.realm = realm
         self.userId = userId
         self.value = value

@@ -16,9 +16,17 @@ class RealmBorderline {
         return realm
     }
     
-    func toSetMock() -> Realm {
+    func toSetMockforACT() -> Realm {
         let memoryRealm: Realm
-        let config = Realm.Configuration(inMemoryIdentifier: "testRealm")
+        let config = Realm.Configuration(inMemoryIdentifier: "testRealmforACT")
+        memoryRealm = try! Realm(configuration: config)
+//        print(Realm.Configuration.defaultConfiguration)
+        return memoryRealm
+    }
+    
+    func toSetMockforUserManagement() -> Realm {
+        let memoryRealm: Realm
+        let config = Realm.Configuration(inMemoryIdentifier: "testRealmforUserManagement")
         memoryRealm = try! Realm(configuration: config)
 //        print(Realm.Configuration.defaultConfiguration)
         return memoryRealm

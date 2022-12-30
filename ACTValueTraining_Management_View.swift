@@ -8,6 +8,7 @@
 import SwiftUI
 
 //TODO: ユーザーIDを可変にしたい
+
 struct ACTValueTrainingManagement_View: View {
     @EnvironmentObject var model: ACTValueTrainingManagementModel
     @State var show: Bool = false
