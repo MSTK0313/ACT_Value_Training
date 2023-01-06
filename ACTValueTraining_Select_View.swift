@@ -92,10 +92,10 @@ struct ACTValueTrainingSelect_View: View {
         let userInfo = UserInfoManagementViewPresenter().readUserInfo()
 
         if (model.values.count == 0) {
-            request.request = "CREATE_ACTVALUETRAINING_DATA"
+            request.request = "MOCKCREATE_ACTVALUETRAINING_DATA"
         }
         else if (model.values.count > 0) {
-            request.request = "UPDATE_ACTVALUETRAINING_DATA"
+            request.request = "MOCKUPDATE_ACTVALUETRAINING_DATA"
         }
         
         let value_family = ACTValue()

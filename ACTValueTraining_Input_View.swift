@@ -7,8 +7,8 @@
 
 import SwiftUI
 
+//TODO: 価値の書き方の推奨みたいなものを入れたい
 struct ACTValueTrainingInput_View: View {
-//    @EnvironmentObject var model: ACTValueTrainingInputModel
     @State var idealAction_family = ""
     @State var idealLevel_family = 1
     @State var achivementLevel_family = 1

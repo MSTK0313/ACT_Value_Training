@@ -30,7 +30,7 @@ class ACTValueTrainingInputPresenter: ACTValueTrainingPresenter {
 class ACTValueTrainingInputModel: ObservableObject {
     @Published var values = [ACTValue()]
     init() {
-        let request = ACTValueTrainingRequest(request: "READ_ALL_ACTVALUETRAINING_DATA")
+        let request = ACTValueTrainingRequest(request: "MOCKREAD_ALL_ACTVALUETRAINING_DATA")
         let userInfo = UserInfo()
         userInfo.userId = UserInfoManagementViewPresenter().readUserInfo().userId
         let value = ACTValue()

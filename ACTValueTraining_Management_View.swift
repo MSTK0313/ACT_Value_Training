@@ -8,6 +8,8 @@
 import SwiftUI
 
 //TODO: ユーザーIDを可変にしたい
+//TODO: ログアウト系を追加したい＝ユーザー管理まわり
+
 
 struct ACTValueTrainingManagement_View: View {
     @EnvironmentObject var model: ACTValueTrainingManagementModel
