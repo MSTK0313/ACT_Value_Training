@@ -24,11 +24,9 @@ struct OK_ButtonStyle: ButtonStyle {
 }
 
 struct CheckBox: View {
-    // 切り替える状態（初期値はfalse）
     @State private var isChecked = false
     @Binding var text: String
     
-    // チェックボックスの表示
     var body: some View {
         HStack {
             Button(action: toggle) {
@@ -43,7 +41,6 @@ struct CheckBox: View {
         }
     }
     
-    // タップ時の状態の切り替え
     func toggle() -> Void {isChecked = !isChecked
         UIImpactFeedbackGenerator(style: .medium)
             .impactOccurred()

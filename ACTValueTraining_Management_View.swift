@@ -41,7 +41,9 @@ struct ACTValueTrainingManagement_View: View {
             .fullScreenCover(isPresented: self.$show) {
                 ACTValueTrainingInput_View()
             }
+            Footer_View()
         }
+        
     }
 }
 
