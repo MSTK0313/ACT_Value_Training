@@ -26,15 +26,17 @@ class ACTValueTrainingInputPresenter: ACTValueTrainingPresenter {
     }
     
 }
-//TODO: inputが表示されない
+
 class ACTValueTrainingInputModel: ObservableObject {
     @Published var values = [ACTValue()]
     init() {
-        let request = ACTValueTrainingRequest(request: "READ_ALL_ACTVALUETRAINING_DATA")
+        let request = ACTValueTrainingRequest(request: "MOCKREAD_ALL_ACTVALUETRAINING_DATA")
         let userInfo = UserInfo()
         userInfo.userId = UserInfoManagementViewPresenter().readUserInfo().userId
         let value = ACTValue()
         values = ACTValueTrainingController(request: request, userInfo: userInfo, value: value).controllARequest() as! [ACTValue]
+        print("values.count:")
+        print(values.count)
     }
 }
 

@@ -41,7 +41,8 @@ struct ACTValueTrainingSelect_View: View {
     @Binding var idealLevel_health: Int
     @Binding var achivementLevel_health: Int
     
-    @State var show: Bool = false
+    @State var back: Bool = false
+    @State var next: Bool = false
     
     let data = [1,2,3,4,5,6,7,8,9]
     let values = ["Family","Lover","Nurture","Friends","Work","Grows","Hobby","Mentality","Community","Health"]
@@ -70,18 +71,32 @@ struct ACTValueTrainingSelect_View: View {
                     Text(values[9] + " :\n\(idealAction_health) \nIdeal level : \(idealLevel_health)\tAchivement level : \(achivementLevel_health)").tag(values[9]).lineLimit(nil)
                 }
                 .environment(\.editMode, .constant(.active))
-                
-                Button(action : {
-                    if(CrickResistantButton().crickResistantButton(dataSet: flagCheck(flags: selectionValue)) == "SUCCESS") {
-                        self.show.toggle()
+                HStack {
+                    Spacer()
+                    //TODO: Intputで入力したデータをバックしても引き継ぎたい
+                    Button(action : { self.back.toggle() }) {
+                        Text("<")
                     }
-                }) {
-                   Text("OK")
+                    .buttonStyle(OK_ButtonStyle())
+                    .fullScreenCover(isPresented: self.$back) {
+                        ACTValueTrainingInput_View()
+                    }
+                    Spacer()
+                    Button(action : {
+                        if(CrickResistantButton().crickResistantButton(dataSet: flagCheck(flags: selectionValue)) == "SUCCESS") {
+                            self.next.toggle()
+                        }
+                    }) {
+                        Text("OK")
+                    }
+                    
+                    .buttonStyle(OK_ButtonStyle())
+                    .fullScreenCover(isPresented: self.$next) {
+                        ACTValueTrainingManagement_View().environmentObject(ACTValueTrainingManagementModel())
+                    }
+                    Spacer()
                 }
-               .buttonStyle(OK_ButtonStyle())
-               .fullScreenCover(isPresented: self.$show) {
-                   ACTValueTrainingManagement_View().environmentObject(ACTValueTrainingManagementModel())
-               }
+                .padding()
             }
         }
     }
@@ -92,10 +107,10 @@ struct ACTValueTrainingSelect_View: View {
         let userInfo = UserInfoManagementViewPresenter().readUserInfo()
 
         if (model.values.count == 0) {
-            request.request = "CREATE_ACTVALUETRAINING_DATA"
+            request.request = "MOCKCREATE_ACTVALUETRAINING_DATA"
         }
         else if (model.values.count > 0) {
-            request.request = "UPDATE_ACTVALUETRAINING_DATA"
+            request.request = "MOCKUPDATE_ACTVALUETRAINING_DATA"
         }
         
         let value_family = ACTValue()

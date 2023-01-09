@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-//TODO: 価値の書き方の推奨みたいなものを入れたい
 struct ACTValueTrainingInput_View: View {
     @State var idealAction_family = ""
     @State var idealLevel_family = 1
@@ -40,10 +39,24 @@ struct ACTValueTrainingInput_View: View {
     @State var idealLevel_health = 1
     @State var achivementLevel_health = 1
 
-    @State var show: Bool = false
+    @State var back: Bool = false
+    @State var next: Bool = false
+    @State var question: Bool = false
        
     var body: some View {
         VStack {
+            HStack{
+                Spacer()
+                Button(action: {self.question.toggle()}) {
+                    VStack {
+                        Label("",systemImage: "questionmark.circle")
+                    }
+                }
+                .frame(alignment: .topLeading)
+                .fullScreenCover(isPresented: self.$question) {
+                    ExplanationOfHowToACTValueTraining_View()
+                }
+            }
             List {
                 template(category: "Family", idealAction: $idealAction_family, idealLevel: $idealLevel_family, achivementLevel: $achivementLevel_family).environmentObject(ACTValueTrainingInputModel())
                 template(category: "Lover", idealAction: $idealAction_lover, idealLevel: $idealLevel_lover, achivementLevel: $achivementLevel_lover).environmentObject(ACTValueTrainingInputModel())
@@ -56,13 +69,26 @@ struct ACTValueTrainingInput_View: View {
                 template(category: "Community", idealAction: $idealAction_community, idealLevel: $idealLevel_community, achivementLevel: $achivementLevel_community).environmentObject(ACTValueTrainingInputModel())
                 template(category: "Health", idealAction: $idealAction_health, idealLevel: $idealLevel_health, achivementLevel: $achivementLevel_health).environmentObject(ACTValueTrainingInputModel())
             }
-            Button(action : { self.show.toggle() }) {
-               Text("OK")
+            HStack {
+                Spacer()
+                Button(action : { self.back.toggle() }) {
+                    Text("<")
+                }
+                .buttonStyle(OK_ButtonStyle())
+                .fullScreenCover(isPresented: self.$back) {
+                    ACTValueTrainingManagement_View().environmentObject(ACTValueTrainingManagementModel())
+                }
+                Spacer()
+                Button(action : { self.next.toggle() }) {
+                    Text("OK")
+                }
+                .buttonStyle(OK_ButtonStyle())
+                .fullScreenCover(isPresented: self.$next) {
+                    ACTValueTrainingSelect_View(idealAction_family: $idealAction_family, idealLevel_family: $idealLevel_family, achivementLevel_family: $achivementLevel_family,idealAction_lover: $idealAction_lover,idealLevel_lover: $idealLevel_lover,achivementLevel_lover: $achivementLevel_lover,idealAction_nurture: $idealAction_nurture,idealLevel_nurture: $idealLevel_nurture,achivementLevel_nurture: $achivementLevel_nurture,idealAction_friend: $idealAction_friend,idealLevel_friend: $idealLevel_friend,achivementLevel_friend: $achivementLevel_friend,idealAction_work: $idealAction_work,idealLevel_work: $idealLevel_work,achivementLevel_work: $achivementLevel_work,idealAction_grows:$idealAction_grows,idealLevel_grows: $idealLevel_grows,achivementLevel_grows: $achivementLevel_grows,idealAction_hobby:$idealAction_hobby,idealLevel_hobby: $idealLevel_hobby,achivementLevel_hobby: $achivementLevel_hobby,idealAction_mental: $idealAction_mental,idealLevel_mental: $idealLevel_mental,achivementLevel_mental: $achivementLevel_mental,idealAction_community: $idealAction_community,idealLevel_community: $idealLevel_community,achivementLevel_community: $achivementLevel_community,idealAction_health: $idealAction_health,idealLevel_health: $idealLevel_health,achivementLevel_health: $achivementLevel_health).environmentObject(ACTValueTrainingInputModel())
+                }
+                Spacer()
             }
-           .buttonStyle(OK_ButtonStyle())
-           .fullScreenCover(isPresented: self.$show) {
-               ACTValueTrainingSelect_View(idealAction_family: $idealAction_family, idealLevel_family: $idealLevel_family, achivementLevel_family: $achivementLevel_family,idealAction_lover: $idealAction_lover,idealLevel_lover: $idealLevel_lover,achivementLevel_lover: $achivementLevel_lover,idealAction_nurture: $idealAction_nurture,idealLevel_nurture: $idealLevel_nurture,achivementLevel_nurture: $achivementLevel_nurture,idealAction_friend: $idealAction_friend,idealLevel_friend: $idealLevel_friend,achivementLevel_friend: $achivementLevel_friend,idealAction_work: $idealAction_work,idealLevel_work: $idealLevel_work,achivementLevel_work: $achivementLevel_work,idealAction_grows:$idealAction_grows,idealLevel_grows: $idealLevel_grows,achivementLevel_grows: $achivementLevel_grows,idealAction_hobby:$idealAction_hobby,idealLevel_hobby: $idealLevel_hobby,achivementLevel_hobby: $achivementLevel_hobby,idealAction_mental: $idealAction_mental,idealLevel_mental: $idealLevel_mental,achivementLevel_mental: $achivementLevel_mental,idealAction_community: $idealAction_community,idealLevel_community: $idealLevel_community,achivementLevel_community: $achivementLevel_community,idealAction_health: $idealAction_health,idealLevel_health: $idealLevel_health,achivementLevel_health: $achivementLevel_health).environmentObject(ACTValueTrainingInputModel())
-            }
+            .padding()
         }
     }
 }
